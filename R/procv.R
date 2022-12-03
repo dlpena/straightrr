@@ -1,3 +1,4 @@
+
 #' procv
 #'
 #' A função retorna o volume correspondente a uma determinada cota em uma curva cota-volume
@@ -10,24 +11,33 @@
 #'
 #'
 #'
-
 procv <- function(val_procv, curvacv) {
-  if (ncol(curvacv) != 2) {
-    stop("O argumento curvacv deve ser um data frame de duas colunas")
+  if (length(ncol(curvacv)) == 0) {
 
-  } else {
+    stop("O argumento \'curvacv\' deve ser um data frame de duas colunas")
+  }
+  else if (ncol(curvacv) != 2) {
+
+    stop("O argumento \'curvacv\' deve ser um data frame de duas colunas")
+
+    }
+    else {
+
     num_linha <- which(curvacv[, 1] == val_procv)
 
     valor <- curvacv[num_linha, 2]
 
-    if (length(valor) > 0) {
-      return(valor)
+      if (length(valor) > 0) {
 
-    } else {
+        return(valor)
+
+      }
+      else {
+
       warning("O valor procurado não se encontra na curva")
 
+      }
     }
-
-  }
-
 }
+
+
