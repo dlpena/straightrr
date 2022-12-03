@@ -25,28 +25,51 @@
 #' @export
 
 
-cotavolume <-  function(ini, fim, passo = 0.01, c0 = 0, c1 = 0, c2 = 0, c3 = 0, c4 = 0) {
+cotavolume <-
+  function(ini,
+           fim,
+           passo = 0.01,
+           c0 = 0,
+           c1 = 0,
+           c2 = 0,
+           c3 = 0,
+           c4 = 0) {
 
-  rngcota <- seq(ini, fim, by = passo)
-  cota <-  NULL
-  volume <- NULL
+    arg <- list(ini, fim, passo, c0, c1, c2, c3, c4)
 
-  for (i in rngcota) {
+    for (i in arg) {
+      if (!is.numeric(i)) {
+        stop(
+          paste0(
+            "O argumento '",
+            i,
+            "' não é do tipo numérico. A função aceita somente argumentos numéricos."
+          )
+        )
 
-    cota <- c(cota, i)
+      }
 
-    volume_i = c0 +
-      (c1 * i) +
-      (c2 * (i ** 2)) +
-      (c3 * (i ** 3)) +
-      (c4 * (i ** 4))
+    }
 
-    volume <- c(volume, volume_i)
+    rngcota <- seq(ini, fim, by = passo)
+    cota <-  NULL
+    volume <- NULL
+
+    for (i in rngcota) {
+      cota <- c(cota, i)
+
+      volume_i = c0 +
+        (c1 * i) +
+        (c2 * (i ** 2)) +
+        (c3 * (i ** 3)) +
+        (c4 * (i ** 4))
+
+      volume <- c(volume, volume_i)
+
+    }
+
+    cota_volume <- data.frame(cota, volume)
+
+    return(cota_volume)
 
   }
-
- Cota_volume <- data.frame(cota, volume)
-
- Cota_volume
-
-}
