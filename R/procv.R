@@ -12,25 +12,19 @@
 #'
 
 procv <- function(val_procv, curvacv) {
-
-  if (ncol(curvacv) != 2){
-
-    print("Erro: O argumento curvacv deve ser um data frame de duas colunas")
+  if (ncol(curvacv) != 2) {
+    stop("O argumento curvacv deve ser um data frame de duas colunas")
 
   } else {
-
     num_linha <- which(curvacv[, 1] == val_procv)
 
     valor <- curvacv[num_linha, 2]
 
-    if (length(valor)>0){
-
+    if (length(valor) > 0) {
       return(valor)
 
     } else {
-
-      print("Aviso: O valor procurado não se encontra na curva")
-
+      warning("O valor procurado não se encontra na curva")
 
     }
 
